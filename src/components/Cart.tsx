@@ -25,8 +25,8 @@ const Cart = () => {
           buttonVariants({
             variant: 'ghost',
             size: 'icon',
-          }),
-          'group'
+            className: 'group',
+          })
         )}
       >
         <div className="relative mr-2">
@@ -40,7 +40,7 @@ const Cart = () => {
         </div>
       </SheetTrigger>
 
-      <SheetContent className="flex w-full flex-col sm:max-w-lg ">
+      <SheetContent className="flex w-full flex-col sm:max-w-lg">
         <SheetHeader className="space-y-2.5 pr-6">
           <SheetTitle className="text-primary font-black flex items-center gap-2">
             <div className="bg-primary w-fit py-1 px-2 text-white font-normal md:font-black text-sm md:text-base rounded-tr-xl rounded-bl-xl text-nowrap">
