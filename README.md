@@ -2,7 +2,11 @@
 
 ## Tutorial
 
-> [Next.js Tutorail](https://www.youtube.com/watch?v=mQnWCmVErnw&t=916s&ab_channel=SangamMukherjee) > [graphql tutorial 1](https://medium.com/@TGod-Ajayi/integrating-graphql-with-next-js-and-react-using-typescript-a-beginners-guide-e65e268dedd5) > [graphql tutorial 2](https://hackernoon.com/setting-up-a-graphql-server-and-client-in-nextjs)
+> [Next.js Tutorail](https://www.youtube.com/watch?v=mQnWCmVErnw&t=916s&ab_channel=SangamMukherjee)
+
+> [graphql tutorial 1](https://medium.com/@TGod-Ajayi/integrating-graphql-with-next-js-and-react-using-typescript-a-beginners-guide-e65e268dedd5)
+
+> [graphql tutorial 2](https://hackernoon.com/setting-up-a-graphql-server-and-client-in-nextjs)
 
 ## Create project
 
