@@ -35,6 +35,9 @@ npx shadcn-ui@latest add label input
 # add several plugins for form validattions
 npm i react-hook-form @hookform/resolvers zod sonner
 
+# graph QL
+npm install @apollo/client graphql
+
 [Backend]
 npm i express
 npm i -D @types/express
@@ -71,3 +74,16 @@ ctrl + m
 shift + alt + o
 ```
 
+## Recommend Vscode plugins
+
+```
+- Tailwind CSS IntelliSense
+- ES7+ React/Redux/React-Native snippets
+- JS JSX Snippets
+- Live Server
+- Auto Close Tag
+- CSS Peek
+- css snippet
+- indent-rainbow
+- IntelliSense for CSS class names in HTML
+```
