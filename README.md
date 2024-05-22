@@ -71,3 +71,7 @@ ctrl + m
 shift + alt + o
 ```
 
+## Plugin
+- Tailwind CSS IntelliSense
+- ES7+ React/Redux/React-Native snippets
+

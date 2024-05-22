@@ -1,5 +1,6 @@
 import type {Config} from 'tailwindcss'
 
+// https://nerdcave.com/tailwind-cheat-sheet
 const config = {
   darkMode: ['class'],
   content: [
