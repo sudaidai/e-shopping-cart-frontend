@@ -1,29 +1,52 @@
 'use client'
 
-import {Button, buttonVariants} from '@/components/ui/button'
-import {Input} from '@/components/ui/input'
-import {Label} from '@/components/ui/label'
-import {cn} from '@/lib/utils'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { cn } from '@/lib/utils'
 import {
   TAuthCredentialsValidator,
   AuthCredentialsValidator,
 } from '@/lib/validators/account-credentials-validator'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {ArrowRight, Squirrel} from 'lucide-react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ArrowRight, Squirrel } from 'lucide-react'
 import Link from 'next/link'
-import {useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 const Page = () => {
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator),
   })
 
-  const onSubmit = ({email, password}: TAuthCredentialsValidator) => {
-    // TODO: send data to the server
+  const onSubmit = async ({ email, password, name }: TAuthCredentialsValidator) => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/member`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          account: email,
+          password: password,
+          name: name
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to register');
+      }
+  
+      const data = await response.json();
+      console.log('Registration successful:', data);
+      // Handle successful registration here, like redirecting the user or showing a success message
+    } catch (error) {
+      console.error('Error during registration:', error);
+      // Handle errors here, such as displaying a message to the user
+    }
   }
 
   return (
@@ -83,6 +106,23 @@ const Page = () => {
                   {errors?.password && (
                     <p className="text-sm text-red-500">
                       {errors.password.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className="grid gap-1 py-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input
+                    type="text"
+                    className={cn({
+                      'focus-visible:ring-red-500': errors.name,
+                    })}
+                    placeholder="Name"
+                    {...register('name')}
+                  />
+                  {errors?.name && (
+                    <p className="text-sm text-red-500">
+                      {errors.name.message}
                     </p>
                   )}
                 </div>
