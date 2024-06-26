@@ -30,7 +30,7 @@ const Page = () => {
         throw new Error('Failed to register');
       }
 
-      console.log('Registration successful:', await response.json());
+      alert("Registration successful");
     } catch (error) {
       console.error('Error during registration:', error);
     }
@@ -78,7 +78,6 @@ const Page = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
           {renderInput('email', 'email')}
           {renderInput('password', 'password')}
-          {renderInput('name')}
           <Button>Sign up</Button>
         </form>
       </div>
