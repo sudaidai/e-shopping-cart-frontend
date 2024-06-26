@@ -62,8 +62,8 @@ const Page = () => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-          {renderInput('email')}
-          {renderInput('password')}
+          {renderInput('email', 'email')}
+          {renderInput('password', 'password')}
           {renderInput('name')}
           <Button>Sign up</Button>
         </form>
