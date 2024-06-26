@@ -3,7 +3,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Label, Input } from '@/components/ui';
+import { Button, Label, Input, buttonVariants } from '@/components/ui';
 import { cn } from '@/lib/utils';
 import { TAuthCredentialsValidator, AuthCredentialsValidator } from '@/lib/validators/account-credentials-validator';
 import { ArrowRight, Squirrel } from 'lucide-react';
@@ -62,8 +62,16 @@ const Page = () => {
             <Squirrel className="h-20 w-20 text-primary" />
           </div>
           <h1 className="text-2xl font-semibold tracking-tight text-primary">Create an account</h1>
-          <Link href="/sign-in" className="gap-1.5">
-            Already have an account? Sign-in <ArrowRight className="h-4 w-4" />
+
+          <Link
+              className={buttonVariants({
+                variant: 'link',
+                className: 'gap-1.5',
+              })}
+              href="/sign-in"
+            >
+              Already have an account? Sign-in
+              <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
