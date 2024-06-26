@@ -57,14 +57,13 @@ const Page = () => {
           </div>
           <h1 className="text-2xl font-semibold tracking-tight text-primary">Create an account</h1>
           <Link href="/sign-in" className="gap-1.5">
-            Already have an account? Sign-in
-            <ArrowRight className="h-4 w-4" />
+            Already have an account? Sign-in <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-          {renderInput('email', 'email')}
-          {renderInput('password', 'password')}
+          {renderInput('email')}
+          {renderInput('password')}
           {renderInput('name')}
           <Button>Sign up</Button>
         </form>
