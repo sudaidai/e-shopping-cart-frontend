@@ -22,7 +22,7 @@ const Page = () => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, account: data.email }),
       });
 
@@ -45,9 +45,15 @@ const Page = () => {
         placeholder={name}
         {...register(name)}
       />
+
+      {errors[name] && (
+        <p className="text-sm text-red-500">
+          {errors[name]?.message}
+        </p>
+      )}
     </div>
   );
-  
+
   return (
     <div className="container relative flex pt-6 md:pt-12 flex-col items-center justify-center lg:px-0">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
