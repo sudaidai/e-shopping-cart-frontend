@@ -10,9 +10,20 @@ import {
 import Image from 'next/image'
 import Autoplay from 'embla-carousel-autoplay'
 import Link from 'next/link'
-import {buttonVariants} from '@/components/ui/button'
+import {Button, buttonVariants} from '@/components/ui/button'
+import {fetchFilms} from '@/graphql/test/test.services'
+import {cn} from '@/lib/utils'
 
 export default function Home() {
+  async function getFilms() {
+    try {
+      const res = await fetchFilms()
+      console.log('films : ', res)
+    } catch (error) {
+      console.log('error : ', error)
+    }
+  }
+
   return (
     <>
       <div className="flex justify-center my-6">
@@ -24,6 +35,17 @@ export default function Home() {
         >
           Go to Playground
         </Link>
+      </div>
+
+      <div className="flex justify-center my-6">
+        <Button
+          className={buttonVariants({
+            className: 'w-60 h-12',
+          })}
+          onClick={getFilms}
+        >
+          Get GraphQL Api Data
+        </Button>
       </div>
 
       <Carousel
