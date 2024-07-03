@@ -4,7 +4,7 @@ import Image from 'next/image'
 const BrucePage = () => {
   return (
     <>
-      <div className="wrap mx-4 max-w-screen-2xl min-w-[375px] justify-between">
+      <div className="mx-4 max-w-screen-2xl justify-between">
         {/* Container with maximum width of 2XL screens and minimum width of 375px */}
         <header className="header flex flex-col pb-16 relative">
           {/* Header element using flexbox, arranged in a column, with padding-bottom of 16, and positioned relatively */}
@@ -18,6 +18,7 @@ const BrucePage = () => {
                 alt="btn toggle"
                 width={24}
                 height={24}
+                className="w-6 h-6 lg:w-10 lg:h-10"
                 />
             </a>
             <div className="header-logo">
@@ -27,6 +28,7 @@ const BrucePage = () => {
                   alt="Logo"
                   width={120}
                   height={40}
+                  className="w-6 h-6 lg:w-10 lg:h-10"
                 />
               </a>
             </div>
