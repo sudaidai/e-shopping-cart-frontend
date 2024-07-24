@@ -4,6 +4,7 @@ const axiosInstance = axios.create()
 
 axiosInstance.interceptors.request.use(
   config => {
+    // console.log('config : ', config)
     config.withCredentials = true
 
     if (config.method === 'post') {
@@ -19,6 +20,10 @@ axiosInstance.interceptors.response.use(
     return resp
   },
   error => {
+    if (axios.isAxiosError(error) && error.response?.data) {
+      return Promise.reject(error.response.data)
+    }
+    // // console.log('error : ', error.message)
     return Promise.reject(error)
   }
 )

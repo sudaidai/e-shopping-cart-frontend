@@ -2,6 +2,7 @@ import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 import './globals.css'
 import {cn} from '@/lib/utils'
+import {Toaster} from '@/components/ui/sonner'
 
 const inter = Inter({subsets: ['latin']})
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body
         className={cn('relative h-full font-sans antialiased', inter.className)}
       >
+        <Toaster position="top-center" />
         <main className="relative flex flex-col min-h-screen">{children}</main>
       </body>
     </html>

@@ -9,13 +9,13 @@ import {
   TAuthCredentialsValidator,
   AuthCredentialsValidator,
 } from '@/lib/validators/account-credentials-validator'
-import {ArrowRight, Squirrel} from 'lucide-react'
+import {ArrowRight, Squirrel, ShieldX, ShieldCheck} from 'lucide-react'
 import Link from 'next/link'
 import {apiMember} from '@/services/api'
-import {redirect} from 'next/navigation'
 import {useRouter} from 'next/navigation'
+import {toast} from 'sonner'
 
-const SignUpPage = () => {
+const SignInPage = () => {
   const {
     register,
     handleSubmit,
@@ -32,15 +32,30 @@ const SignUpPage = () => {
 
   const onSubmit: SubmitHandler<TAuthCredentialsValidator> = async data => {
     try {
-      const response = await apiMember({...data, account: data.email})
-      if (response.status !== 200) {
-        console.log('response : ', response)
-        throw new Error('Failed to register')
-      }
+      const response = await apiMember({...data})
+      console.log('response : ', response)
+      toast('', {
+        description: (
+          <div className="flex items-center justify-start gap-2 text-green-400">
+            <ShieldCheck />
+            {response.data as string}
+          </div>
+        ),
+      })
 
-      directToHomePageHandler
+      setTimeout(() => {
+        directToHomePageHandler()
+      }, 800)
     } catch (error) {
-      console.error('Error during registration:', error)
+      toast('', {
+        description: (
+          <div className="flex items-center justify-start gap-2 text-red-500">
+            <ShieldX />
+            {error as string}
+          </div>
+        ),
+        className: 'error',
+      })
     }
   }
 
@@ -67,37 +82,43 @@ const SignUpPage = () => {
     <div className="container relative flex pt-6 md:pt-12 flex-col items-center justify-center lg:px-0">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col items-center space-y-2 text-center">
-          <div className="rounded-full h-28 w-28 bg-secondary flex items-center justify-center">
+          <div
+            className="rounded-full h-28 w-28 bg-secondary flex items-center justify-center cursor-pointer"
+            onClick={directToHomePageHandler}
+          >
             <Squirrel className="h-20 w-20 text-primary" />
           </div>
           <h1 className="text-2xl font-semibold tracking-tight text-primary">
-            Create an account
+            Sign in to E-Shopping
           </h1>
 
           <div className="flex items-center gap-2">
-            <div className="text-xs">Already have an account?</div>
+            <div className="text-xs">Do not have an account? </div>
             <Link
               className={buttonVariants({
                 variant: 'link',
                 className: 'gap-1 text-xs',
                 size: 'noBorder',
               })}
-              href="/sign-in"
+              href="/sign-up"
             >
-              Sign In
+              Sign Up
               <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-          {renderInput('email', 'email')}
+          {renderInput('account', 'email')}
           {renderInput('password', 'password')}
-          <Button>Sign up</Button>
+          <div className="underline text-primary text-xs text-center cursor-pointer hover:underline">
+            Forget Password ?
+          </div>
+          <Button>Sign In</Button>
         </form>
       </div>
     </div>
   )
 }
 
-export default SignUpPage
+export default SignInPage

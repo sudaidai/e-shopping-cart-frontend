@@ -31,12 +31,12 @@ const Navbar = () => {
         <SheetFooter>
           <SheetTrigger asChild>
             <Link
-              href="/sign-up"
+              href="/sign-in"
               className={buttonVariants({
                 className: 'w-full',
               })}
             >
-              Sign Up
+              Sign In
             </Link>
           </SheetTrigger>
         </SheetFooter>
