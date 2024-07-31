@@ -9,10 +9,11 @@ import {
   TAuthCredentialsValidator,
   AuthCredentialsValidator,
 } from '@/lib/validators/account-credentials-validator'
-import {ArrowRight, Squirrel} from 'lucide-react'
+import {ArrowRight, Squirrel, ShieldX, ShieldCheck} from 'lucide-react'
 import Link from 'next/link'
 import {apiMember} from '@/services/api'
 import {useRouter} from 'next/navigation'
+import {toast} from 'sonner'
 
 const SignUpPage = () => {
   const {
@@ -25,8 +26,6 @@ const SignUpPage = () => {
 
   const router = useRouter()
 
-  const isResponseSuccessful = (status: number) => status >= 200 && status < 300
-
   function directToHomePageHandler() {
     router.push('/')
   }
@@ -34,14 +33,29 @@ const SignUpPage = () => {
   const onSubmit: SubmitHandler<TAuthCredentialsValidator> = async data => {
     try {
       const response = await apiMember({...data})
-      if (!isResponseSuccessful(response.status)) {
-        console.log('response : ', response)
-        throw new Error('Failed to register')
-      }
+      console.log('response : ', response)
+      toast('', {
+        description: (
+          <div className="flex items-center justify-start gap-2 text-green-400">
+            <ShieldCheck />
+            {response.data as string}
+          </div>
+        ),
+      })
 
-      directToHomePageHandler
+      setTimeout(() => {
+        directToHomePageHandler()
+      }, 800)
     } catch (error) {
-      console.error('Error during registration:', error)
+      toast('', {
+        description: (
+          <div className="flex items-center justify-start gap-2 text-red-500">
+            <ShieldX />
+            {error as string}
+          </div>
+        ),
+        className: 'error',
+      })
     }
   }
 
