@@ -12,7 +12,6 @@ import {
 import {ArrowRight, Squirrel} from 'lucide-react'
 import Link from 'next/link'
 import {apiMember} from '@/services/api'
-import {redirect} from 'next/navigation'
 import {useRouter} from 'next/navigation'
 
 const SignUpPage = () => {
@@ -26,14 +25,16 @@ const SignUpPage = () => {
 
   const router = useRouter()
 
+  const isResponseSuccessful = (status: number) => status >= 200 && status < 300
+
   function directToHomePageHandler() {
     router.push('/')
   }
 
   const onSubmit: SubmitHandler<TAuthCredentialsValidator> = async data => {
     try {
-      const response = await apiMember({...data, account: data.email})
-      if (response.status !== 200) {
+      const response = await apiMember({...data})
+      if (!isResponseSuccessful(response.status)) {
         console.log('response : ', response)
         throw new Error('Failed to register')
       }
@@ -91,7 +92,7 @@ const SignUpPage = () => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-          {renderInput('email', 'email')}
+          {renderInput('account', 'account')}
           {renderInput('password', 'password')}
           <Button>Sign up</Button>
         </form>

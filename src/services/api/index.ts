@@ -8,3 +8,9 @@ export const apiMember = (data: IMemberQuery) =>
 
 export const apiAuth = (data: IMemberQuery) =>
   axiosInstance.post(`${baseUrl}auth`, data)
+
+export const apiHome = () =>
+  axiosInstance.get(`${baseUrl}home`)
+
+export const apiProduct = () =>
+  axiosInstance.get(`${baseUrl}product`)
