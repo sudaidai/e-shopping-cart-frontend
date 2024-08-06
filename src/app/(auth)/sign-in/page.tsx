@@ -11,9 +11,10 @@ import {
 } from '@/lib/validators/account-credentials-validator'
 import {ArrowRight, Squirrel, ShieldX, ShieldCheck} from 'lucide-react'
 import Link from 'next/link'
-import {apiMember} from '@/services/api'
+import {apiAuth} from '@/services/api'
 import {useRouter} from 'next/navigation'
 import {toast} from 'sonner'
+import {AxiosResponse} from 'axios'
 
 const SignInPage = () => {
   const {
@@ -30,15 +31,30 @@ const SignInPage = () => {
     router.push('/')
   }
 
-  const onSubmit: SubmitHandler<TAuthCredentialsValidator> = async data => {
+  const onSubmit: SubmitHandler<TAuthCredentialsValidator> = async query => {
     try {
-      const response = await apiMember({...data})
-      console.log('response : ', response)
+      const {data}: AxiosResponse<IAuthData> = await apiAuth({...query})
+      console.log('data : ', data)
+      const {token} = data
+
+      if (!token) {
+        toast('', {
+          description: (
+            <div className="flex items-center justify-start gap-2 text-red-500">
+              <ShieldX />
+              Authentication failed.
+            </div>
+          ),
+          className: 'error',
+        })
+        return
+      }
+
       toast('', {
         description: (
           <div className="flex items-center justify-start gap-2 text-green-400">
             <ShieldCheck />
-            {response.data as string}
+            Welcome to E-Shopping.
           </div>
         ),
       })
@@ -47,11 +63,12 @@ const SignInPage = () => {
         directToHomePageHandler()
       }, 800)
     } catch (error) {
+      console.error('Error during login in:', JSON.stringify(error))
       toast('', {
         description: (
           <div className="flex items-center justify-start gap-2 text-red-500">
             <ShieldX />
-            {error as string}
+            Login failed.
           </div>
         ),
         className: 'error',

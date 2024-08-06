@@ -95,3 +95,25 @@ shift + alt + o
 - indent-rainbow
 - IntelliSense for CSS class names in HTML
 ```
+
+## Generate random base64
+
+```
+openssl rand -base64 32
+```
+
+## [Lucide icons website](https://lucide.dev/icons/shield-check)
+
+## Api Docs
+
+```
+open sql container
+
+cd D:\hytech_Study\e-shopping-cart-backend\web
+./gradlew bootRun
+
+http://localhost:8000/swagger-ui/index.html#/
+http://localhost:8000/graphiql?path=/graphql
+
+Bearer ...token
+```
