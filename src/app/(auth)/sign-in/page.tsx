@@ -11,10 +11,11 @@ import {
 } from '@/lib/validators/account-credentials-validator'
 import {ArrowRight, Squirrel, ShieldX, ShieldCheck} from 'lucide-react'
 import Link from 'next/link'
-import {apiAuth} from '@/services/api'
+import {apiLogIn} from '@/services/api'
 import {useRouter} from 'next/navigation'
 import {toast} from 'sonner'
 import {AxiosResponse} from 'axios'
+import {setJwtTokenHandler} from '@/lib/auth'
 
 const SignInPage = () => {
   const {
@@ -33,8 +34,7 @@ const SignInPage = () => {
 
   const onSubmit: SubmitHandler<TAuthCredentialsValidator> = async query => {
     try {
-      const {data}: AxiosResponse<IAuthData> = await apiAuth({...query})
-      console.log('data : ', data)
+      const {data}: AxiosResponse<IAuthData> = await apiLogIn({...query})
       const {token} = data
 
       if (!token) {
@@ -49,6 +49,9 @@ const SignInPage = () => {
         })
         return
       }
+
+      // set token to cookie
+      setJwtTokenHandler({token})
 
       toast('', {
         description: (

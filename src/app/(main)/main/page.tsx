@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex justify-center my-6">
+      {/* <div className="flex justify-center my-6">
         <Link
           href={'/playground'}
           className={buttonVariants({
@@ -46,7 +46,7 @@ export default function Home() {
         >
           Get GraphQL Api Data
         </Button>
-      </div>
+      </div> */}
 
       <Carousel
         opts={{

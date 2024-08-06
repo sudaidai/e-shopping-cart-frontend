@@ -1,3 +1,4 @@
+import {getJwtTokenHandler} from '@/lib/auth'
 import axios from 'axios'
 
 const axiosInstance = axios.create()
@@ -5,7 +6,11 @@ const axiosInstance = axios.create()
 axiosInstance.interceptors.request.use(
   config => {
     // console.log('config : ', config)
+    // set credentials
     config.withCredentials = true
+    // set header with Authorization
+    const token = getJwtTokenHandler()
+    if (token) config.headers.Authorization = getJwtTokenHandler()
 
     if (config.method === 'post') {
       const data = config.data

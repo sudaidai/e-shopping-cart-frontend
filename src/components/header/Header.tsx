@@ -1,6 +1,6 @@
 'use client'
 
-import {UserRound, Settings, LogOut} from 'lucide-react'
+import {UserRound, Settings, LogOut, ShieldCheck} from 'lucide-react'
 import {Button} from '../ui/button'
 import Cart from '../Cart'
 import Navbar from '../Navbar'
@@ -16,16 +16,37 @@ import {
 } from '../ui/dropdown-menu'
 import {useRouter} from 'next/navigation'
 import Link from 'next/link'
+import {getJwtTokenHandler, removeJwtTokenHandler} from '@/lib/auth'
+import {toast} from 'sonner'
+import {useEffect, useState} from 'react'
 
 const Header = () => {
   const router = useRouter()
+
+  const [isLogin, setIsLogin] = useState(false)
+  useEffect(() => {
+    const token = getJwtTokenHandler()
+    setIsLogin(!token ? false : true)
+  }, [])
 
   async function signInHandler() {
     router.push('/sign-in')
   }
 
   async function signOutHandler() {
-    router.push('/sign-in')
+    removeJwtTokenHandler()
+    // TODO: call sign out api
+    setTimeout(() => {
+      toast('', {
+        description: (
+          <div className="flex items-center justify-start gap-2 text-green-400">
+            <ShieldCheck />
+            Welcome to E-Shopping.
+          </div>
+        ),
+      })
+    }, 800)
+    // router.push('/sign-in')
   }
 
   return (
@@ -75,24 +96,29 @@ const Header = () => {
                     />
                   </DropdownMenuShortcut>
                 </DropdownMenuItem> */}
-                <DropdownMenuItem onClick={signInHandler}>
-                  Sign in
-                  <DropdownMenuShortcut>
-                    <LogOut
-                      aria-hidden
-                      className="h-5 w-5 flex-shrink-0 text-primary"
-                    />
-                  </DropdownMenuShortcut>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={signOutHandler}>
-                  Log out
-                  <DropdownMenuShortcut>
-                    <LogOut
-                      aria-hidden
-                      className="h-5 w-5 flex-shrink-0 text-primary"
-                    />
-                  </DropdownMenuShortcut>
-                </DropdownMenuItem>
+                {!isLogin && (
+                  <DropdownMenuItem onClick={signInHandler}>
+                    Sign in
+                    <DropdownMenuShortcut>
+                      <LogOut
+                        aria-hidden
+                        className="h-5 w-5 flex-shrink-0 text-primary"
+                      />
+                    </DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                )}
+
+                {isLogin && (
+                  <DropdownMenuItem onClick={signOutHandler}>
+                    Log out
+                    <DropdownMenuShortcut>
+                      <LogOut
+                        aria-hidden
+                        className="h-5 w-5 flex-shrink-0 text-primary"
+                      />
+                    </DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                )}
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>

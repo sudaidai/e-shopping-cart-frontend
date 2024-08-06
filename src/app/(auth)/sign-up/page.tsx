@@ -34,7 +34,6 @@ const SignUpPage = () => {
     try {
       const response = await apiMember({...data})
       if (response.status !== 201) {
-        console.log('response : ', response)
         throw new Error('Failed to register')
       }
 
@@ -42,12 +41,11 @@ const SignUpPage = () => {
         directToHomePageHandler()
       }, 800)
     } catch (error) {
-      console.error('Error during registration:', error)
       toast('', {
         description: (
           <div className="flex items-center justify-start gap-2 text-red-500">
             <ShieldX />
-            {error as string}
+            Create account failed.
           </div>
         ),
         className: 'error',
