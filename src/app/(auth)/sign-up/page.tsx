@@ -12,7 +12,6 @@ import {
 import {ArrowRight, Squirrel, ShieldX} from 'lucide-react'
 import Link from 'next/link'
 import {apiMember} from '@/services/api'
-import {redirect} from 'next/navigation'
 import {useRouter} from 'next/navigation'
 import {toast} from 'sonner'
 
