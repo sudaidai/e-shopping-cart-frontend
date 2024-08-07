@@ -13,8 +13,11 @@ import Link from 'next/link'
 import {Button, buttonVariants} from '@/components/ui/button'
 import {fetchFilms, fetchHello} from '@/graphql/test/test.services'
 import {cn} from '@/lib/utils'
+import {useRouter} from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
+
   async function getFilms() {
     try {
       const res = await fetchHello()
@@ -22,6 +25,10 @@ export default function Home() {
     } catch (error) {
       console.log('error : ', error)
     }
+  }
+
+  function directToHProductPageHandler() {
+    router.push('/product')
   }
 
   return (
@@ -96,8 +103,9 @@ export default function Home() {
           <CarouselContent className="">
             {Array.from({length: 6}).map((_, index: number) => (
               <CarouselItem
-                className="relative w-[360px] h-[360px] sm:h-[215px] sm:w-[215px] lg:h-[354px] lg:w-[354px] md:basis-1/3"
+                className="relative w-[360px] h-[360px] sm:h-[215px] sm:w-[215px] lg:h-[354px] lg:w-[354px] md:basis-1/3 cursor-pointer"
                 key={index}
+                onClick={directToHProductPageHandler}
               >
                 <div className="w-full flex justify-center">
                   <Image
