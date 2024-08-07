@@ -17,7 +17,8 @@ const APOLLO_CLIENT_CONNECT = () => {
   })
 
   const httpLink = createHttpLink({
-    uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
+    // uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
+    uri: 'http://localhost:8000/graphql',
     useGETForQueries: false, // Use GET method for queries
   })
 

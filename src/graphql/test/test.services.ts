@@ -1,4 +1,5 @@
 import {GET_FILMS_QUERY} from './queries/films.queries'
+import {GET_HELLO_QUERY} from './queries/hello.quries'
 import APOLLO_CLIENT_CONNECT from '../apollo-client'
 
 // mock api : https://studio.apollographql.com/public/star-wars-swapi/variant/current/explorer
@@ -8,6 +9,15 @@ export const fetchFilms = async () => {
   try {
     const response = await APOLLO_CLIENT_CONNECT().query({
       query: GET_FILMS_QUERY,
+    })
+    return response
+  } catch (error) {}
+}
+
+export const fetchHello = async () => {
+  try {
+    const response = await APOLLO_CLIENT_CONNECT().query({
+      query: GET_HELLO_QUERY,
     })
     return response
   } catch (error) {}
