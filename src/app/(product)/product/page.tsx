@@ -17,6 +17,21 @@ const products = [
     name: 'Product 3',
     price: 2000
   },
+  {
+    id: '4',
+    name: 'Product 4',
+    price: 100.5
+  },
+  {
+    id: '5',
+    name: 'Product 5',
+    price: 10
+  },
+  {
+    id: '6',
+    name: 'Product 6',
+    price: 30
+  }
 ];
 
 const Product: React.FC = () => {
