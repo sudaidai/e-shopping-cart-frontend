@@ -1,6 +1,6 @@
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
-import '../globals.css'
+import '../../app/globals.css'
 import {cn} from '@/lib/utils'
 import Header from '@/components/header/Header'
 import Footer from '@/components/Footer'
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      <div className="mx-auto max-w-[1200px] mt-[100px] mb-[48px] w-full">
+      <div className="mx-auto max-w-[1200px] mt-[60px] mb-[48px] w-full">
         {children}
       </div>
       <Footer />

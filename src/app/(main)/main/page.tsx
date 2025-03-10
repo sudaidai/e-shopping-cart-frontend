@@ -1,5 +1,6 @@
 'use client'
 
+import Layout from '@/components/layouts/DefaultLayout'
 import {
   Carousel,
   CarouselContent,
@@ -14,8 +15,9 @@ import {Button, buttonVariants} from '@/components/ui/button'
 import {fetchFilms, fetchHello} from '@/graphql/test/test.services'
 import {cn} from '@/lib/utils'
 import {useRouter} from 'next/navigation'
+import {ReactElement} from 'react'
 
-export default function Home() {
+const Home = () => {
   const router = useRouter()
 
   async function getFilms() {
@@ -32,7 +34,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <Layout>
       {/* <div className="flex justify-center my-6">
         <Link
           href={'/playground'}
@@ -44,7 +46,7 @@ export default function Home() {
         </Link>
       </div> */}
 
-      <div className="flex justify-center my-6">
+      {/* <div className="flex justify-center my-6">
         <Button
           className={buttonVariants({
             className: 'w-60 h-12',
@@ -53,7 +55,7 @@ export default function Home() {
         >
           Get GraphQL Api Data
         </Button>
-      </div>
+      </div> */}
 
       <Carousel
         opts={{
@@ -86,7 +88,7 @@ export default function Home() {
 
       <div className="mt-8">
         <div className="text-primary font-black text-lg text-center mb-3">
-          Product Information
+          Product Categories
         </div>
         <Carousel
           opts={{
@@ -123,7 +125,13 @@ export default function Home() {
           <CarouselNext className="sm:-right-8 lg:-right-10" />
         </Carousel>
       </div>
-    </>
+    </Layout>
   )
 }
+
+// Home.getLayout = function getLayout(page: ReactElement) {
+//   return <Layout>{page}</Layout>
+// }
+
+export default Home
 

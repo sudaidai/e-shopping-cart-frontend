@@ -1,17 +1,19 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
-interface Product {
-  id: string;
-  name: string;
-  price: number;
+export interface IProduct {
+  id: string
+  name: string
+  price: number
+  description: string
+  image: [string]
 }
 
-interface ProductItemProps {
-  product: Product;
+export interface ProductItemProps {
+  product: IProduct
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
+const ProductItem: React.FC<ProductItemProps> = ({product}) => {
   return (
     <Link href={`/product/${product.id}`} className="group">
       {/* `group`: Allows the use of `group-hover` to apply styles when the parent group is hovered */}
@@ -24,9 +26,9 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
         <Image
           src={`/product/${product.id}.jpg`}
           alt={product.name}
-          className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-          width={270}
-          height={230}
+          className="w-full h-[160px] object-cover transition-transform duration-300 group-hover:scale-105"
+          width={160}
+          height={160}
         />
         {/* `w-full`: Makes the image take the full width of the container
             `h-auto`: Adjusts the height automatically to maintain the aspect ratio
@@ -47,11 +49,13 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
           <p className="text-sm text-gray-600">{`${product.price} NTD`}</p>
           {/* `text-sm`: Sets the font size to small
               `text-gray-600`: Applies a medium gray color to the text */}
+          <p className="text-sm text-gray-400 line-clamp-3 min-h-[75px]">
+            {product.description}
+          </p>
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}
 
-
-export default ProductItem;
+export default ProductItem
