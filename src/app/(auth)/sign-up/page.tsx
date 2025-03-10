@@ -14,6 +14,7 @@ import Link from 'next/link'
 import {apiMember} from '@/services/api'
 import {useRouter} from 'next/navigation'
 import {toast} from 'sonner'
+import RenderInput from '@/components/auth/RenderInput'
 
 const SignUpPage = () => {
   const {
@@ -53,36 +54,17 @@ const SignUpPage = () => {
     }
   }
 
-  const renderInput = (
-    name: keyof TAuthCredentialsValidator,
-    type: React.HTMLInputTypeAttribute = 'text'
-  ) => (
-    <div className="grid gap-1 py-2">
-      <Label htmlFor={name}>{name}</Label>
-      <Input
-        type={type}
-        className={cn({'focus-visible:ring-red-500': errors[name]?.message})}
-        placeholder={name}
-        {...register(name)}
-      />
-
-      {errors[name] && (
-        <p className="text-sm text-red-500">{errors[name]?.message}</p>
-      )}
-    </div>
-  )
-
   return (
     <div className="container relative flex pt-6 md:pt-12 flex-col items-center justify-center lg:px-0">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col items-center space-y-2 text-center">
           <div
-            className="rounded-full h-28 w-28 bg-secondary flex items-center justify-center cursor-pointer"
+            className="rounded-full h-16 w-16 bg-secondary flex items-center justify-center cursor-pointer"
             onClick={directToHomePageHandler}
           >
-            <Squirrel className="h-20 w-20 text-primary" />
+            <Squirrel className="h-9 w-9 text-primary" />
           </div>
-          <h1 className="text-2xl font-semibold tracking-tight text-primary">
+          <h1 className="text-lg font-semibold tracking-tight text-primary">
             Create an account
           </h1>
 
@@ -102,9 +84,11 @@ const SignUpPage = () => {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-          {renderInput('account', 'email')}
-          {renderInput('password', 'password')}
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-8">
+          <div className="grid gap-2">
+            {RenderInput('account', 'email', register, errors)}
+            {RenderInput('password', 'password', register, errors)}
+          </div>
           <Button>Sign up</Button>
         </form>
       </div>
