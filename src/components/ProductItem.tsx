@@ -1,14 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export interface IProduct {
-  id: string
-  name: string
-  price: number
-  description: string
-  image: [string]
-}
-
 export interface ProductItemProps {
   product: IProduct
 }

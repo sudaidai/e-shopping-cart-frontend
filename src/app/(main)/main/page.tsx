@@ -15,10 +15,14 @@ import {Button, buttonVariants} from '@/components/ui/button'
 import {fetchFilms, fetchHello} from '@/graphql/test/test.services'
 import {cn} from '@/lib/utils'
 import {useRouter} from 'next/navigation'
-import {ReactElement} from 'react'
+import {ReactElement, useEffect} from 'react'
 
 const Home = () => {
   const router = useRouter()
+
+  useEffect(() => {
+    getFilms()
+  }, [])
 
   async function getFilms() {
     try {

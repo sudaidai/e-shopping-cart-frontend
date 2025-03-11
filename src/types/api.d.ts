@@ -1,15 +1,18 @@
 /* eslint-disable no-unused-vars */
 
-// export interface IMemberQuery {
-//   password: string
-//   account: string
-// }
-
-declare interface IMemberQuery {
+declare interface IMember {
   password: string
   account: string
 }
 
 declare interface IAuthData {
   token: string
+}
+
+declare interface IProduct {
+  id: string
+  name: string
+  price: number
+  description: string
+  image: [string]
 }

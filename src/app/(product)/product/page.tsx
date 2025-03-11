@@ -1,12 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Layout from '@/components/layouts/DefaultLayout'
-import ProductItem, {IProduct} from '@/components/ProductItem'
+import ProductItem from '@/components/ProductItem'
 import {ArrowLeft} from 'lucide-react'
 import {useRouter} from 'next/navigation'
+import {apiProduct} from '@/services/api'
 
-const products: Array<IProduct> = [
+const mockProducts: Array<IProduct> = [
   {
     id: '1',
     name: 'Product 1',
@@ -60,6 +61,26 @@ const products: Array<IProduct> = [
 const Product: React.FC = () => {
   const router = useRouter()
 
+  const [products, setProducts] = useState<IProduct[]>([])
+
+  useEffect(() => {
+    console.log('999999')
+    // fetchProducts()
+  }, [])
+
+  fetchProducts()
+
+  async function fetchProducts() {
+    try {
+      const res = await apiProduct()
+      console.log('res : ', res)
+    } catch (error) {
+      console.log('error : ', error)
+    }
+  }
+
+  console.log('products : ', products)
+
   function backToMainPageHandler() {
     router.push('/main')
   }
@@ -75,9 +96,13 @@ const Product: React.FC = () => {
           <div>Product Category Page</div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {products.map(product => (
-            <ProductItem key={product.id} product={product} />
-          ))}
+          {products?.length ? (
+            products.map(product => (
+              <ProductItem key={product.id} product={product} />
+            ))
+          ) : (
+            <div>No Products to view.</div>
+          )}
         </div>
       </div>
     </Layout>
